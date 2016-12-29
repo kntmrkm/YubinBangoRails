@@ -1,0 +1,21 @@
+version: '2'
+services:
+  # railsのコンテナ
+  web:
+    # DBとは違って、こっちはカレントディレクトリでdocker buildしてイメージを作成
+    build: .
+    # コンテナ実行時のコマンドを指定
+    command: bash -c "rm -f ./tmp/pids/server.pid && (bundle check || bundle install -j4 --retry 3) && bundle ex rails s -b 0.0.0.0 -p 3000"
+    environment:
+      BUNDLE_PATH: vendor/bundle
+    # ホストOSのカレントディレクトリをコンテナ内の/myappと共有させる
+    volumes:
+      - .:/myapp
+    # ホストOSの3000番ポートとコンテナ内の3000番ポートを設定
+    ports:
+      - "3000:3000"
+
+# ローカルのボリュームの設定
+volumes:
+  db-data:
+    driver: local
