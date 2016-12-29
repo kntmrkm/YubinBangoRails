@@ -1,4 +1,4 @@
-<%= form_for(post) do |f| %>
+<%= form_for(post, html: { class: 'h-adr' }) do |f| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -19,6 +19,28 @@
   <div class="field">
     <%= f.label :body %>
     <%= f.text_area :body %>
+  </div>
+
+  <span class="p-country-name" style="display:none;">Japan</span>
+
+  <div class="field">
+    <%= f.label :zip %>
+    <%= f.text_field :zip, class: 'p-postal-code' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :prefecture %>
+    <%= f.text_field :prefecture, class: 'p-region' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city %>
+    <%= f.text_field :city, class: 'p-locality' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :street %>
+    <%= f.text_field :street, class: 'p-street-address' %>
   </div>
 
   <div class="actions">

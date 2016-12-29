@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$.fn.exists = function(){return Boolean(this.length > 0); };
+
+$(document).on('page:change page:restore', function() {
+  console.log('YubinBango reinitialize.');
+  console.log('.h-adr existence.', $('.h-adr').exists());
+  if ($('.h-adr').exists()) alert('exist!');
+  new YubinBango.MicroformatDom();
+});
